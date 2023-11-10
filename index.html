@@ -13,6 +13,10 @@
     table {
       margin-top: 20px;
     }
+
+    #transactions {
+      margin-top: 30px;
+    }
   </style>
 </head>
 <body>
@@ -73,6 +77,13 @@
         <!-- Table rows will be dynamically added here -->
       </tbody>
     </table>
+
+    <div id="transactions">
+      <h4>Recent Transactions</h4>
+      <ul id="transactionList">
+        <!-- Recent transactions will be dynamically added here -->
+      </ul>
+    </div>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -81,9 +92,6 @@
   <script>
     // Initialize data structure to store cumulative quantities
     var stockData = {};
-
-    // Initialize the table with 0 values
-    updateTable();
 
     function submitOrder() {
       var item = document.getElementById('item').value;
@@ -110,6 +118,9 @@
       // Update the table
       updateTable();
 
+      // Update recent transactions
+      updateTransactions(item, storage, action, quantity);
+
       // Reset form values
       document.getElementById('item').value = '';
       document.getElementById('storage').value = '';
@@ -135,6 +146,14 @@
           cellStorage.innerHTML = stockData[item][storage];
         }
       }
+    }
+
+    function updateTransactions(item, storage, action, quantity) {
+      var transactionList = document.getElementById('transactionList');
+      var listItem = document.createElement('li');
+
+      listItem.innerHTML = `${action.toUpperCase()} - ${quantity} ${item} at ${storage} (${new Date().toLocaleString()})`;
+      transactionList.prepend(listItem);
     }
   </script>
 </body>
