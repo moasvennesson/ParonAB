@@ -1,3 +1,11 @@
 .selector-for-some-widget {
     box-sizing: content-box;
   }
+
+#changeForm {
+    width: 100%;
+}
+
+body {
+    background-color: brown;
+}
