@@ -61,6 +61,7 @@
     <ul id="resultsList" class="list-group">
       <!-- The list of submitted forms will be displayed here -->
     </ul>
+    <p id="totalSum"><strong>Total Sum:</strong> 0</p>
   </div>
 </div>
 
@@ -118,20 +119,24 @@
     // Save the updated array back to localStorage
     localStorage.setItem('submittedForms', JSON.stringify(submittedForms));
 
-    // Update the displayed list
+    // Update the displayed list and total sum
     updateResultsList();
   }
 
-  // Function to update the displayed list of submitted forms
+  // Function to update the displayed list of submitted forms and total sum
   function updateResultsList() {
     // Get the container for results
     var resultsListContainer = document.getElementById('resultsList');
+    var totalSumContainer = document.getElementById('totalSum');
 
     // Clear the existing content
     resultsListContainer.innerHTML = '';
 
     // Get submitted forms from localStorage
     var submittedForms = JSON.parse(localStorage.getItem('submittedForms')) || [];
+
+    // Initialize total sum
+    var totalSum = 0;
 
     // Create list items for each submitted form and append them to the list
     submittedForms.forEach(function (formData) {
@@ -140,4 +145,24 @@
       listItem.innerHTML = `
         <strong>Dropdown 1:</strong> ${formData.dropdown1}<br>
         <strong>Dropdown 2:</strong> ${formData.dropdown2}<br>
-        <
+        <strong>Transaction Type:</strong> ${formData.transactionType}<br>
+        <strong>Quantity:</strong> ${formData.quantity}<br>
+        <strong>Sum:</strong> ${formData.sum}
+      `;
+
+      resultsListContainer.appendChild(listItem);
+
+      // Accumulate total sum
+      totalSum += formData.sum;
+    });
+
+    // Display the total sum
+    totalSumContainer.innerHTML = `<strong>Total Sum:</strong> ${totalSum}`;
+  }
+
+  // Initialize the displayed list on page load
+  updateResultsList();
+</script>
+
+</body>
+</html>
