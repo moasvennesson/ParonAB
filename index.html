@@ -23,49 +23,47 @@
     <div class="container">
         <form action="#" id="new-movie-form">
             <fieldset>
+                <legend></legend>
                 <div class="form-group">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Produkt
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">jTelefon</a></li>
-                            <li><a class="dropdown-item" href="#">jPlatta</a></li>
-                            <li><a class="dropdown-item" href="#">Päronklocka</a></li>
-                        </ul>
-                    </div>
-                </div>
+                    <select id="grade" class="form-control">
+                        <option value="" selected>Produkt</option>
+                        <option value="1">jTelefon</option>
+                        <option value="2">jPlatta</option>
+                        <option value="3">Päronklocka</option>
+                    </select>
 
-                <div class="form-group">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Lager
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">1. Cupertino</a></li>
-                            <li><a class="dropdown-item" href="#">2. Norrköping </a></li>
-                            <li><a class="dropdown-item" href="#">3. Frankfurt</a></li>
-                        </ul>
-                    </div>
                 </div>
+    </div>
 
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">In i lager</label>
-                </div>
-                <div class="col">
-                    <input type="text" class="form-control" placeholder="Antal">
-                </div>
+    <div class="form-group">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Lager
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">1. Cupertino</a></li>
+                <li><a class="dropdown-item" href="#">2. Norrköping </a></li>
+                <li><a class="dropdown-item" href="#">3. Frankfurt</a></li>
+            </ul>
+        </div>
+    </div>
 
-                <div class="form-group mt-2">
-                    <button id="save-movie" class="btn btn-success">
-                        Submit Change
-                    </button>
-                </div>
-            </fieldset>
-        </form>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <p>Ut i lager</p><label class="form-check-label" for="flexSwitchCheckDefault">In i lager</label>
+    </div>
+    <div class="col">
+        <input type="text" class="form-control" placeholder="Antal">
+    </div>
+
+    <div class="form-group mt-2">
+        <button id="save-movie" class="btn btn-success">
+            Submit Change
+        </button>
+    </div>
+    </fieldset>
+    </form>
     </div>
 
     <h2>Lagersaldo</h2>
