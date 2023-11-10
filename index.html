@@ -25,6 +25,7 @@
         <div class="form-group col-md-4">
           <label for="item">Item</label>
           <select class="form-control" id="item" required>
+            <option value="" disabled selected>Select Item</option>
             <option value="item1">Item 1</option>
             <option value="item2">Item 2</option>
             <option value="item3">Item 3</option>
@@ -34,6 +35,7 @@
         <div class="form-group col-md-4">
           <label for="storage">Storage Site</label>
           <select class="form-control" id="storage" required>
+            <option value="" disabled selected>Select Storage Site</option>
             <option value="storage1">Storage Site 1</option>
             <option value="storage2">Storage Site 2</option>
             <option value="storage3">Storage Site 3</option>
@@ -43,6 +45,7 @@
         <div class="form-group col-md-2">
           <label for="action">Action</label>
           <select class="form-control" id="action" required>
+            <option value="" disabled selected>Select Action</option>
             <option value="in">In</option>
             <option value="out">Out</option>
           </select>
@@ -98,7 +101,7 @@
       // Reset form values
       document.getElementById('item').value = '';
       document.getElementById('storage').value = '';
-      document.getElementById('action').value = 'in';
+      document.getElementById('action').value = '';
       document.getElementById('quantity').value = '';
     }
   </script>
