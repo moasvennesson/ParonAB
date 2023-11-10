@@ -39,27 +39,71 @@
     <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
   </form>
 
-  <div id="resultsContainer"></div>
+  <div id="resultsContainer">
+    <!-- The list of submitted forms will be displayed here -->
+  </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
+  // Function to submit the form
   function submitForm() {
     // Get selected values
     var dropdown1Value = document.getElementById('dropdown1').value;
     var dropdown2Value = document.getElementById('dropdown2').value;
 
-    // Create a new result element
-    var resultElement = document.createElement('div');
-    resultElement.className = 'alert alert-info';
-    resultElement.innerHTML = 'Selected values: ' + dropdown1Value + ' and ' + dropdown2Value;
+    // Create an object to store the form data
+    var formData = {
+      dropdown1: dropdown1Value,
+      dropdown2: dropdown2Value
+    };
 
-    // Append the result element to the container
-    var resultsContainer = document.getElementById('resultsContainer');
-    resultsContainer.appendChild(resultElement);
+    // Get existing submitted forms from localStorage or initialize an empty array
+    var submittedForms = JSON.parse(localStorage.getItem('submittedForms')) || [];
+
+    // Add the current form data to the array
+    submittedForms.push(formData);
+
+    // Save the updated array back to localStorage
+    localStorage.setItem('submittedForms', JSON.stringify(submittedForms));
+
+    // Update the displayed list
+    updateResultsList();
   }
+
+  // Function to update the displayed list of submitted forms
+  function updateResultsList() {
+    // Get the container for results
+    var resultsContainer = document.getElementById('resultsContainer');
+
+    // Clear the existing content
+    resultsContainer.innerHTML = '';
+
+    // Get submitted forms from localStorage
+    var submittedForms = JSON.parse(localStorage.getItem('submittedForms')) || [];
+
+    // Create a list and append each submitted form as a list item
+    if (submittedForms.length > 0) {
+      var resultList = document.createElement('ul');
+      resultList.className = 'list-group';
+
+      submittedForms.forEach(function (formData) {
+        var listItem = document.createElement('li');
+        listItem.className = 'list-group-item';
+        listItem.innerHTML = 'Selected values: ' + formData.dropdown1 + ' and ' + formData.dropdown2;
+
+        resultList.appendChild(listItem);
+      });
+
+      // Append the list to the results container
+      resultsContainer.appendChild(resultList);
+    }
+  }
+
+  // Initialize the displayed list on page load
+  updateResultsList();
 </script>
 
 </body>
