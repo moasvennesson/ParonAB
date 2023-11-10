@@ -2,40 +2,50 @@
 var stockData = {};
 
 function submitOrder() {
-  var item = document.getElementById('item').value;
-  var storage = document.getElementById('storage').value;
-  var action = document.getElementById('action').value;
-  var quantity = parseInt(document.getElementById('quantity').value);
-
-  // Check if the order already exists in the data structure
-  if (!stockData[item]) {
-    stockData[item] = {};
+    var item = document.getElementById('item').value;
+    var storage = document.getElementById('storage').value;
+    var action = document.querySelector('input[name="action"]:checked');
+    var quantity = parseInt(document.getElementById('quantity').value);
+  
+    // Validate inputs
+    if (!item || !storage || !action || isNaN(quantity) || quantity < 0) {
+      alert('Please fill in all fields and enter a valid quantity.');
+      return;
+    }
+  
+    action = action.value; // Get the value of the checked radio button
+  
+    // Initialize data structure if not already present
+    if (!stockData[item]) {
+      stockData[item] = {};
+    }
+  
+    if (!stockData[item][storage]) {
+      stockData[item][storage] = 0;
+    }
+  
+    // Update the cumulative quantity based on the action
+    if (action === 'in') {
+      stockData[item][storage] += quantity;
+    } else if (action === 'out') {
+      stockData[item][storage] -= quantity;
+    }
+  
+    // Update the table
+    updateTable();
+  
+    // Update recent transactions
+    updateTransactions(item, storage, action, quantity);
+  
+    // Reset form values
+    document.getElementById('item').value = '';
+    document.getElementById('storage').value = '';
+    document.getElementById('quantity').value = '';
+  
+    // Optional: Provide user feedback (you can customize this part)
+    alert('Order submitted successfully!');
   }
-
-  if (!stockData[item][storage]) {
-    stockData[item][storage] = 0;
-  }
-
-  // Update the cumulative quantity based on the action
-  if (action === 'in') {
-    stockData[item][storage] += quantity;
-  } else if (action === 'out') {
-    stockData[item][storage] -= quantity;
-  }
-
-  // Update the table
-  updateTable();
-
-  // Update recent transactions
-  updateTransactions(item, storage, action, quantity);
-
-  // Reset form values
-  document.getElementById('item').value = '';
-  document.getElementById('storage').value = '';
-  document.getElementById('action').value = '';
-  document.getElementById('quantity').value = '';
-}
-
+  
 function updateTable() {
   var tableBody = document.getElementById('orderTableBody');
 
