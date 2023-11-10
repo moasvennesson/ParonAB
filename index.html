@@ -1,87 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bootstrap demo</title>
-    <link href="style.css" type="text/css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Dropdown Form</title>
+  <style>
+    /* Add any additional custom styles here */
+    body {
+      padding: 20px;
+    }
+  </style>
 </head>
-
-
-
 <body>
 
-
-
-
-    <div class="container">
-        <form action="#" id="new-movie-form">
-            <fieldset>
-                <legend></legend>
-                <div class="form-group">
-                    <select id="grade" class="form-control">
-                        <option value="" selected>Produkt</option>
-                        <option value="1">jTelefon</option>
-                        <option value="2">jPlatta</option>
-                        <option value="3">Päronklocka</option>
-                    </select>
-
-                </div>
+<div class="container">
+  <h2>Select Options</h2>
+  
+  <form id="myForm">
+    <div class="form-group">
+      <label for="dropdown1">Dropdown 1:</label>
+      <select class="form-control" id="dropdown1">
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+      </select>
     </div>
 
     <div class="form-group">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Lager
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">1. Cupertino</a></li>
-                <li><a class="dropdown-item" href="#">2. Norrköping </a></li>
-                <li><a class="dropdown-item" href="#">3. Frankfurt</a></li>
-            </ul>
-        </div>
+      <label for="dropdown2">Dropdown 2:</label>
+      <select class="form-control" id="dropdown2">
+        <option value="optionA">Option A</option>
+        <option value="optionB">Option B</option>
+        <option value="optionC">Option C</option>
+      </select>
     </div>
 
-    <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-        <p>Ut i lager</p><label class="form-check-label" for="flexSwitchCheckDefault">In i lager</label>
-    </div>
-    <div class="col">
-        <input type="text" class="form-control" placeholder="Antal">
-    </div>
+    <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
+  </form>
 
-    <div class="form-group mt-2">
-        <button id="save-movie" class="btn btn-success">
-            Submit Change
-        </button>
-    </div>
-    </fieldset>
-    </form>
-    </div>
+  <div id="resultsContainer"></div>
+</div>
 
-    <h2>Lagersaldo</h2>
-    <ul id="movie-list">
-    </ul>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  function submitForm() {
+    // Get selected values
+    var dropdown1Value = document.getElementById('dropdown1').value;
+    var dropdown2Value = document.getElementById('dropdown2').value;
 
+    // Create a new result element
+    var resultElement = document.createElement('div');
+    resultElement.className = 'alert alert-info';
+    resultElement.innerHTML = 'Selected values: ' + dropdown1Value + ' and ' + dropdown2Value;
 
-    <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-        crossorigin="anonymous"></script>
+    // Append the result element to the container
+    var resultsContainer = document.getElementById('resultsContainer');
+    resultsContainer.appendChild(resultElement);
+  }
+</script>
 
 </body>
-
 </html>
