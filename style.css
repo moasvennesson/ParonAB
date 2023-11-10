@@ -2,12 +2,6 @@
     box-sizing: content-box;
   }
 
-#changeForm {
-    background-color: rgb(0, 23, 128);
+#navnarDarkDropdownMenuLink{
+    color: white!important;
 }
-/*
-.container {
-    display: flex;
-    justify-content:space-evenly;
-}
-*/
