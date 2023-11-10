@@ -1,70 +1,70 @@
-const dropdownElementList = document.querySelectorAll('.dropdown-toggle')
-const dropdownList = [...dropdownElementList].map(dropdownToggleEl => new bootstrap.Dropdown(dropdownToggleEl))
+// Initialize data structure to store cumulative quantities
+var stockData = {};
 
+function submitOrder() {
+  var item = document.getElementById('item').value;
+  var storage = document.getElementById('storage').value;
+  var action = document.getElementById('action').value;
+  var quantity = parseInt(document.getElementById('quantity').value);
 
-var myDropdown = document.getElementById('myDropdown')
-myDropdown.addEventListener('show.bs.dropdown', function () {
-  // do something...
-})
+  // Check if the order already exists in the data structure
+  if (!stockData[item]) {
+    stockData[item] = {};
+  }
 
+  if (!stockData[item][storage]) {
+    stockData[item][storage] = 0;
+  }
 
+  // Update the cumulative quantity based on the action
+  if (action === 'in') {
+    stockData[item][storage] += quantity;
+  } else if (action === 'out') {
+    stockData[item][storage] -= quantity;
+  }
 
-function printMovies(movies) {
-    $("#movie-list").html("");
-    movies.forEach((movie) => {
-        $("#movie-list").append(`<li data-grade="${movie.grade}" data-title="${movie.title}">
-            ${movie.title}
-            <img src="images/delete.png" alt="Delete movie" class="delete-movie">
-            ${getStars(movie.grade)}
-        </li>`);
-    });
+  // Update the table
+  updateTable();
+
+  // Update recent transactions
+  updateTransactions(item, storage, action, quantity);
+
+  // Reset form values
+  document.getElementById('item').value = '';
+  document.getElementById('storage').value = '';
+  document.getElementById('action').value = '';
+  document.getElementById('quantity').value = '';
 }
 
-function loadMovies() {
-    const movies = localStorage.movies;
-    if (movies == undefined) {
-        return [];
+function updateTable() {
+  var tableBody = document.getElementById('orderTableBody');
+
+  // Clear existing rows
+  tableBody.innerHTML = '';
+
+  // Add a row for each item
+  for (var item in stockData) {
+    var newRow = tableBody.insertRow();
+    var cellItem = newRow.insertCell(0);
+    cellItem.innerHTML = item;
+
+    // Add a cell for each storage site
+    for (var storage in stockData[item]) {
+      var cellStorage = newRow.insertCell();
+      cellStorage.innerHTML = stockData[item][storage];
     }
-    return JSON.parse(movies);
+  }
 }
 
+function updateTransactions(item, storage, action, quantity) {
+  var transactionList = document.getElementById('transactionList');
+  var listItem = document.createElement('li');
 
-function saveMovies(movies) {
-    let jsonMovies = JSON.stringify(movies);
-    localStorage.setItem("movies", jsonMovies);
+  listItem.innerHTML = `${action.toUpperCase()} - ${quantity} ${item} at ${storage} (${new Date().toLocaleString()})`;
+  transactionList.prepend(listItem);
 }
 
-$("#new-movie-form").on("submit", function (e) {
-    e.preventDefault();
-
-    const title = $("#title").val();
-    const grade = $("#grade").val();
-
-    if (title == "" || grade == "") {
-        alert("Du måste ange både titel & betyg för att kunna spara filmen!")
-        return false;
-    }
-
-    const movie = {
-        title: title,
-        grade: grade
-    }
-
-    const movies = loadMovies();
-    movies.push(movie);
-
-    $("#new-movie-form").trigger("reset");
-    $("#new-movie-form")[0].reset();
-
-    saveMovies(movies);
-    printMovies(movies);
-});
-
-
-
-
-// Skriver ut filmerna i vår lista när sidan laddats klart
-$(document).ready(function () {
-    const movies = loadMovies();
-    printMovies(movies);
+document.addEventListener('DOMContentLoaded', function () {
+    // Set the initial value for the disabled input
+    document.getElementById('quantity').value = 1;
 });

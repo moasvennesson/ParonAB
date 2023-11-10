@@ -1,160 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stock Status</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
-    body {
-      padding: 20px;
-    }
-
-    table {
-      margin-top: 20px;
-    }
-
-    #transactions {
-      margin-top: 30px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Status</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <div class="container">
-    <h2>Stock Order Form</h2>
-    
-    <form id="orderForm">
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="item">Item</label>
-          <select class="form-control" id="item" required>
-            <option value="" disabled selected>Select Item</option>
-            <option value="item1">Item 1</option>
-            <option value="item2">Item 2</option>
-            <option value="item3">Item 3</option>
-          </select>
+    <div class="container">
+        <h2>Lagerförändring in-och ut leverans</h2>
+        <form id="orderForm">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <select class="form-control" id="item" required>
+                        <option value="" disabled selected>Välj Produkt</option>
+                        <option value="item1">jTelefon</option>
+                        <option value="item2">jPlatta</option>
+                        <option value="item3">Päronklocka</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <select class="form-control" id="storage" required>
+                        <option value="" disabled selected>Välj Färdigvarulager</option>
+                        <option value="storage1">1. Cupertino</option>
+                        <option value="storage2">2. Norrköping</option>
+                        <option value="storage3">3. Frankfurt</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-2">
+
+                    <input type="number" class="form-control" id="quantity" required>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="in" name="action" value="in" required>
+                        <label class="form-check-label" for="in">In i lager</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="out" name="action" value="out" required>
+                        <label class="form-check-label" for="out">Ut ur lager</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12 text-center">
+                    <button type="button" class="btn btn-secondary btn-lg btn-block"
+                        onclick="submitOrder()">Submit</button>
+                </div>
+            </div>
+        </form>
+
+
+        <table class="table table-bordered">
+            <caption></caption>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Storage Site 1</th>
+                    <th>Storage Site 2</th>
+                    <th>Storage Site 3</th>
+                </tr>
+            </thead>
+            <tbody id="orderTableBody">
+                <!-- Table rows will be added here -->
+            </tbody>
+        </table>
+
+        <div id="transactions">
+            <h4>Recent Transactions</h4>
+            <ul id="transactionList">
+                <!-- Recent transactions will be added here -->
+            </ul>
         </div>
-
-        <div class="form-group col-md-4">
-          <label for="storage">Storage Site</label>
-          <select class="form-control" id="storage" required>
-            <option value="" disabled selected>Select Storage Site</option>
-            <option value="storage1">Storage Site 1</option>
-            <option value="storage2">Storage Site 2</option>
-            <option value="storage3">Storage Site 3</option>
-          </select>
-        </div>
-
-        <div class="form-group col-md-2">
-          <label for="action">Action</label>
-          <select class="form-control" id="action" required>
-            <option value="" disabled selected>Select Action</option>
-            <option value="in">In</option>
-            <option value="out">Out</option>
-          </select>
-        </div>
-
-        <div class="form-group col-md-2">
-          <label for="quantity">Quantity</label>
-          <input type="number" class="form-control" id="quantity" required>
-        </div>
-      </div>
-
-      <button type="button" class="btn btn-primary" onclick="submitOrder()">Submit</button>
-    </form>
-
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Storage Site 1</th>
-          <th>Storage Site 2</th>
-          <th>Storage Site 3</th>
-        </tr>
-      </thead>
-      <tbody id="orderTableBody">
-        <!-- Table rows will be dynamically added here -->
-      </tbody>
-    </table>
-
-    <div id="transactions">
-      <h4>Recent Transactions</h4>
-      <ul id="transactionList">
-        <!-- Recent transactions will be dynamically added here -->
-      </ul>
     </div>
-  </div>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script>
-    // Initialize data structure to store cumulative quantities
-    var stockData = {};
-
-    function submitOrder() {
-      var item = document.getElementById('item').value;
-      var storage = document.getElementById('storage').value;
-      var action = document.getElementById('action').value;
-      var quantity = parseInt(document.getElementById('quantity').value);
-
-      // Check if the order already exists in the data structure
-      if (!stockData[item]) {
-        stockData[item] = {};
-      }
-
-      if (!stockData[item][storage]) {
-        stockData[item][storage] = 0;
-      }
-
-      // Update the cumulative quantity based on the action
-      if (action === 'in') {
-        stockData[item][storage] += quantity;
-      } else if (action === 'out') {
-        stockData[item][storage] -= quantity;
-      }
-
-      // Update the table
-      updateTable();
-
-      // Update recent transactions
-      updateTransactions(item, storage, action, quantity);
-
-      // Reset form values
-      document.getElementById('item').value = '';
-      document.getElementById('storage').value = '';
-      document.getElementById('action').value = '';
-      document.getElementById('quantity').value = '';
-    }
-
-    function updateTable() {
-      var tableBody = document.getElementById('orderTableBody');
-
-      // Clear existing rows
-      tableBody.innerHTML = '';
-
-      // Add a row for each item
-      for (var item in stockData) {
-        var newRow = tableBody.insertRow();
-        var cellItem = newRow.insertCell(0);
-        cellItem.innerHTML = item;
-
-        // Add a cell for each storage site
-        for (var storage in stockData[item]) {
-          var cellStorage = newRow.insertCell();
-          cellStorage.innerHTML = stockData[item][storage];
-        }
-      }
-    }
-
-    function updateTransactions(item, storage, action, quantity) {
-      var transactionList = document.getElementById('transactionList');
-      var listItem = document.createElement('li');
-
-      listItem.innerHTML = `${action.toUpperCase()} - ${quantity} ${item} at ${storage} (${new Date().toLocaleString()})`;
-      transactionList.prepend(listItem);
-    }
-  </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>

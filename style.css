@@ -1,14 +1,59 @@
-.selector-for-some-widget {
-    box-sizing: content-box;
-  }
+ body {
+     font-family: 'Roboto', sans-serif;
+     background-color: #f8f9fa;
+     color: #343a40;
+     margin: 0;
+     padding: 0;
+ }
 
+ header {
+     background-color: #007bff;
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+     padding: 15px;
+     text-align: left;
+     color: #fff;
+     font-size: 24px;
+     font-weight: 700;
+ }
 
-.container {
-    display: flex;
-    justify-content:space-evenly;
-}
+ .container {
+     max-width: 80%;
+     margin: 20px auto;
+     padding: 20px;
+     background-color: #fff;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     border-radius: 8px;
+ }
 
+ h2 {
+     color: #011f3f;
+ }
 
-#navnarDarkDropdownMenuLink{
-    color: white!important;
-}
+ .form-group label {
+     color: #011f3f;
+ }
+
+ .form-control {
+     border: 1px solid #ced4da;
+     border-radius: 4px;
+     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+ }
+
+ .form-control:focus {
+     border-color: #011f3f;
+     box-shadow: 0 0 0 0.2rem rgba(0, 28, 57, 0.25);
+ }
+
+ .form-check-label {
+     color: #6c757d;
+ }
+
+ .btn-secondary {
+     background-color: #6c757d;
+     border-color: #6c757d;
+ }
+
+ .btn-secondary:hover {
+     background-color: #5a6268;
+     border-color: #545b62;
+ }
