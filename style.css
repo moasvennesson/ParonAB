@@ -3,10 +3,10 @@
   }
 
 #changeForm {
-    width: 100%;
     background-color: green;
 }
 
-body {
-    background-color: brown;
+.container {
+    display: flex;
+    justify-content:space-evenly;
 }
