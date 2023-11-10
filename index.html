@@ -64,9 +64,9 @@
       <thead>
         <tr>
           <th>Item</th>
-          <th>Storage Site</th>
-          <th>Action</th>
-          <th>Quantity</th>
+          <th>Storage Site 1</th>
+          <th>Storage Site 2</th>
+          <th>Storage Site 3</th>
         </tr>
       </thead>
       <tbody id="orderTableBody">
@@ -79,38 +79,33 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
+    // Initialize data structure to store cumulative quantities
+    var stockData = {};
+
     function submitOrder() {
       var item = document.getElementById('item').value;
       var storage = document.getElementById('storage').value;
       var action = document.getElementById('action').value;
       var quantity = parseInt(document.getElementById('quantity').value);
 
-      var tableBody = document.getElementById('orderTableBody');
-
-      // Check if the order already exists in the table
-      var existingRow = findExistingRow(item, storage, action);
-      
-      if (existingRow) {
-        // If the order exists, update the quantity based on the action
-        var cellQuantity = existingRow.cells[3];
-        if (action === 'in') {
-          cellQuantity.innerHTML = parseInt(cellQuantity.innerHTML) + quantity;
-        } else if (action === 'out') {
-          cellQuantity.innerHTML = parseInt(cellQuantity.innerHTML) - quantity;
-        }
-      } else {
-        // If the order doesn't exist, create a new row
-        var newRow = tableBody.insertRow();
-        var cellItem = newRow.insertCell(0);
-        var cellStorage = newRow.insertCell(1);
-        var cellAction = newRow.insertCell(2);
-        var cellQuantity = newRow.insertCell(3);
-
-        cellItem.innerHTML = item;
-        cellStorage.innerHTML = storage;
-        cellAction.innerHTML = action;
-        cellQuantity.innerHTML = (action === 'in') ? quantity : -quantity;
+      // Check if the order already exists in the data structure
+      if (!stockData[item]) {
+        stockData[item] = {};
       }
+
+      if (!stockData[item][storage]) {
+        stockData[item][storage] = 0;
+      }
+
+      // Update the cumulative quantity based on the action
+      if (action === 'in') {
+        stockData[item][storage] += quantity;
+      } else if (action === 'out') {
+        stockData[item][storage] -= quantity;
+      }
+
+      // Update the table
+      updateTable();
 
       // Reset form values
       document.getElementById('item').value = '';
@@ -119,19 +114,24 @@
       document.getElementById('quantity').value = '';
     }
 
-    function findExistingRow(item, storage, action) {
-      var table = document.getElementById('orderTableBody');
-      for (var i = 0; i < table.rows.length; i++) {
-        var row = table.rows[i];
-        if (
-          row.cells[0].innerHTML === item &&
-          row.cells[1].innerHTML === storage &&
-          row.cells[2].innerHTML === action
-        ) {
-          return row;
+    function updateTable() {
+      var tableBody = document.getElementById('orderTableBody');
+
+      // Clear existing rows
+      tableBody.innerHTML = '';
+
+      // Add a row for each item
+      for (var item in stockData) {
+        var newRow = tableBody.insertRow();
+        var cellItem = newRow.insertCell(0);
+        cellItem.innerHTML = item;
+
+        // Add a cell for each storage site
+        for (var storage in stockData[item]) {
+          var cellStorage = newRow.insertCell();
+          cellStorage.innerHTML = stockData[item][storage];
         }
       }
-      return null;
     }
   </script>
 </body>
