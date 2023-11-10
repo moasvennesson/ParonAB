@@ -82,6 +82,9 @@
     // Initialize data structure to store cumulative quantities
     var stockData = {};
 
+    // Initialize the table with 0 values
+    updateTable();
+
     function submitOrder() {
       var item = document.getElementById('item').value;
       var storage = document.getElementById('storage').value;
