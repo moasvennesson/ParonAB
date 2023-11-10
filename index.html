@@ -3,161 +3,104 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Status</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <title>Extended Form with Calculation</title>
   <style>
-    /* Add any additional custom styles here */
     body {
       padding: 20px;
+    }
+
+    table {
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <h2>Extended Form with Calculation</h2>
-  
-  <form id="myForm">
-    <div class="form-group">
-      <label for="dropdown1">Dropdown 1:</label>
-      <select class="form-control" id="dropdown1">
-        <option value="1">Option 1</option>
-        <option value="2">Option 2</option>
-        <option value="3">Option 3</option>
-      </select>
-    </div>
+  <div class="container">
+    <h2>Stock Order Form</h2>
+    
+    <form id="orderForm">
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="item">Item</label>
+          <select class="form-control" id="item" required>
+            <option value="item1">Item 1</option>
+            <option value="item2">Item 2</option>
+            <option value="item3">Item 3</option>
+          </select>
+        </div>
 
-    <div class="form-group">
-      <label for="dropdown2">Dropdown 2:</label>
-      <select class="form-control" id="dropdown2">
-        <option value="A">Option A</option>
-        <option value="B">Option B</option>
-        <option value="C">Option C</option>
-      </select>
-    </div>
+        <div class="form-group col-md-4">
+          <label for="storage">Storage Site</label>
+          <select class="form-control" id="storage" required>
+            <option value="storage1">Storage Site 1</option>
+            <option value="storage2">Storage Site 2</option>
+            <option value="storage3">Storage Site 3</option>
+          </select>
+        </div>
 
-    <div class="form-group">
-      <label>Transaction Type:</label>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="transactionType" id="inLager" value="In till lager">
-        <label class="form-check-label" for="inLager">In till lager</label>
+        <div class="form-group col-md-2">
+          <label for="action">Action</label>
+          <select class="form-control" id="action" required>
+            <option value="in">In</option>
+            <option value="out">Out</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-2">
+          <label for="quantity">Quantity</label>
+          <input type="number" class="form-control" id="quantity" required>
+        </div>
       </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="transactionType" id="utUrLager" value="Ut ur lager">
-        <label class="form-check-label" for="utUrLager">Ut ur lager</label>
-      </div>
-    </div>
 
-    <div class="form-group">
-      <label for="quantity">Quantity:</label>
-      <input type="number" class="form-control" id="quantity" placeholder="Enter quantity">
-    </div>
+      <button type="button" class="btn btn-primary" onclick="submitOrder()">Submit</button>
+    </form>
 
-    <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
-    <button type="button" class="btn btn-danger" onclick="clearList()">Clear List</button>
-  </form>
-
-  <div id="resultsContainer">
-    <h3>Submitted Forms</h3>
-    <ul id="resultsList" class="list-group">
-      <!-- The list of submitted forms will be displayed here -->
-    </ul>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Storage Site</th>
+          <th>Action</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody id="orderTableBody">
+        <!-- Table rows will be dynamically added here -->
+      </tbody>
+    </table>
   </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-  // Function to submit the form
-  function submitForm() {
-    // Get selected values
-    var dropdown1Value = parseInt(document.getElementById('dropdown1').value);
-    var dropdown2Value = document.getElementById('dropdown2').value;
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    function submitOrder() {
+      var item = document.getElementById('item').value;
+      var storage = document.getElementById('storage').value;
+      var action = document.getElementById('action').value;
+      var quantity = parseInt(document.getElementById('quantity').value);
 
-    // Get selected transaction type
-    var transactionType = document.querySelector('input[name="transactionType"]:checked');
-    var transactionTypeValue = transactionType ? transactionType.value : '';
+      var tableBody = document.getElementById('orderTableBody');
 
-    // Get quantity value
-    var quantityValue = parseInt(document.getElementById('quantity').value);
+      var newRow = tableBody.insertRow();
+      var cellItem = newRow.insertCell(0);
+      var cellStorage = newRow.insertCell(1);
+      var cellAction = newRow.insertCell(2);
+      var cellQuantity = newRow.insertCell(3);
 
-    // Calculate the sum based on the selected options and quantity
-    var sum = 0;
+      cellItem.innerHTML = item;
+      cellStorage.innerHTML = storage;
+      cellAction.innerHTML = action;
+      cellQuantity.innerHTML = quantity;
 
-    if (!isNaN(dropdown1Value)) {
-      sum += dropdown1Value;
+      // Reset form values
+      document.getElementById('item').value = '';
+      document.getElementById('storage').value = '';
+      document.getElementById('action').value = 'in';
+      document.getElementById('quantity').value = '';
     }
-
-    if ((dropdown2Value === 'A' || dropdown2Value === 'B' || dropdown2Value === 'C') && !isNaN(quantityValue)) {
-      if (transactionTypeValue === 'In till lager') {
-        sum += quantityValue;
-      } else if (transactionTypeValue === 'Ut ur lager') {
-        sum -= quantityValue;
-      }
-    }
-
-    // Create an object to store the form data and sum
-    var formData = {
-      dropdown1: dropdown1Value,
-      dropdown2: dropdown2Value,
-      transactionType: transactionTypeValue,
-      quantity: quantityValue,
-      sum: sum
-    };
-
-    // Get existing submitted forms from localStorage or initialize an empty array
-    var submittedForms = JSON.parse(localStorage.getItem('submittedForms')) || [];
-
-    // Add the current form data to the array
-    submittedForms.push(formData);
-
-    // Save the updated array back to localStorage
-    localStorage.setItem('submittedForms', JSON.stringify(submittedForms));
-
-    // Update the displayed list
-    updateResultsList();
-  }
-
-  // Function to clear the list
-  function clearList() {
-    // Clear the local storage
-    localStorage.removeItem('submittedForms');
-
-    // Update the displayed list
-    updateResultsList();
-  }
-
-  // Function to update the displayed list of submitted forms
-  function updateResultsList() {
-    // Get the container for results
-    var resultsListContainer = document.getElementById('resultsList');
-
-    // Clear the existing content
-    resultsListContainer.innerHTML = '';
-
-    // Get submitted forms from localStorage
-    var submittedForms = JSON.parse(localStorage.getItem('submittedForms')) || [];
-
-    // Create list items for each submitted form and append them to the list
-    submittedForms.forEach(function (formData) {
-      var listItem = document.createElement('li');
-      listItem.className = 'list-group-item';
-      listItem.innerHTML = `
-        <strong>Dropdown 1:</strong> ${formData.dropdown1}<br>
-        <strong>Dropdown 2:</strong> ${formData.dropdown2}<br>
-        <strong>Transaction Type:</strong> ${formData.transactionType}<br>
-        <strong>Quantity:</strong> ${formData.quantity}<br>
-        <strong>Sum:</strong> ${formData.sum}
-      `;
-
-      resultsListContainer.appendChild(listItem);
-    });
-  }
-
-  // Initialize the displayed list on page load
-  updateResultsList();
-</script>
-
+  </script>
 </body>
 </html>
