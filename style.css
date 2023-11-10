@@ -2,6 +2,13 @@
     box-sizing: content-box;
   }
 
+
+.container {
+    display: flex;
+    justify-content:space-evenly;
+}
+
+
 #navnarDarkDropdownMenuLink{
     color: white!important;
 }
