@@ -85,8 +85,8 @@
     // Calculate the sum based on the selected options and quantity
     var sum = 0;
 
-    if (!isNaN(dropdown1Value) && !isNaN(quantityValue)) {
-      sum = dropdown1Value * quantityValue;
+    if (!isNaN(dropdown1Value)) {
+      sum += dropdown1Value;
     }
 
     if ((dropdown2Value === 'A' || dropdown2Value === 'B' || dropdown2Value === 'C') && !isNaN(quantityValue)) {
