@@ -40,7 +40,10 @@
   </form>
 
   <div id="resultsContainer">
-    <!-- The list of submitted forms will be displayed here -->
+    <h3>Submitted Forms</h3>
+    <ul id="resultsList" class="list-group">
+      <!-- The list of submitted forms will be displayed here -->
+    </ul>
   </div>
 </div>
 
@@ -76,30 +79,22 @@
   // Function to update the displayed list of submitted forms
   function updateResultsList() {
     // Get the container for results
-    var resultsContainer = document.getElementById('resultsContainer');
+    var resultsListContainer = document.getElementById('resultsList');
 
     // Clear the existing content
-    resultsContainer.innerHTML = '';
+    resultsListContainer.innerHTML = '';
 
     // Get submitted forms from localStorage
     var submittedForms = JSON.parse(localStorage.getItem('submittedForms')) || [];
 
-    // Create a list and append each submitted form as a list item
-    if (submittedForms.length > 0) {
-      var resultList = document.createElement('ul');
-      resultList.className = 'list-group';
+    // Create list items for each submitted form and append them to the list
+    submittedForms.forEach(function (formData) {
+      var listItem = document.createElement('li');
+      listItem.className = 'list-group-item';
+      listItem.innerHTML = 'Selected values: ' + formData.dropdown1 + ' and ' + formData.dropdown2;
 
-      submittedForms.forEach(function (formData) {
-        var listItem = document.createElement('li');
-        listItem.className = 'list-group-item';
-        listItem.innerHTML = 'Selected values: ' + formData.dropdown1 + ' and ' + formData.dropdown2;
-
-        resultList.appendChild(listItem);
-      });
-
-      // Append the list to the results container
-      resultsContainer.appendChild(resultList);
-    }
+      resultsListContainer.appendChild(listItem);
+    });
   }
 
   // Initialize the displayed list on page load
