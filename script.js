@@ -43,7 +43,22 @@ function submitOrder() {
     document.getElementById('quantity').value = '';
   
     // Optional: Provide user feedback (you can customize this part)
-    alert('Order submitted successfully!');
+    displayTimedAlert('Order submitted successfully!', 3000); // 3000 milliseconds (3 seconds)
+  }
+  
+  function displayTimedAlert(message, duration) {
+    var alertDiv = document.createElement('div');
+    alertDiv.className = 'alert alert-success'; // You can customize the class for styling
+  
+    alertDiv.innerHTML = message;
+  
+    // Append the alert to the body
+    document.body.appendChild(alertDiv);
+  
+    // Set a timeout to remove the alert after the specified duration
+    setTimeout(function () {
+      alertDiv.remove();
+    }, duration);
   }
   
 function updateTable() {
