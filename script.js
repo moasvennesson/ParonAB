@@ -121,10 +121,15 @@ document.getElementById('toggleTransactions').addEventListener('click', function
 
 function toggleTransactionList() {
   var transactionList = document.getElementById('transactionList');
+  var toggleLink = document.getElementById('toggleTransactions');
 
   // Toggle the display property of the transaction list
   transactionList.style.display = (transactionList.style.display === 'none' || transactionList.style.display === '') ? 'block' : 'none';
+
+  // Change the text of the toggle link based on the current state
+  toggleLink.innerText = (transactionList.style.display === 'none' || transactionList.style.display === '') ? 'Click here to view' : 'Click here to hide';
 }
+
 
 function updateTransactions(item, storage, action, quantity) {
   var transactionList = document.getElementById('transactionList');
