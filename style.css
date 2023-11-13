@@ -1,29 +1,12 @@
  body {
-     font-family: 'Roboto', sans-serif;
+     font-family: 'Lato', sans-serif;
      background-color: #f8f9fa;
      color: #343a40;
      margin: 0;
      padding: 0;
  }
 
- header {
-     background-color: #007bff;
-     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-     padding: 15px;
-     text-align: left;
-     color: #fff;
-     font-size: 24px;
-     font-weight: 700;
- }
 
- .container {
-     max-width: 80%;
-     margin: 20px auto;
-     padding: 20px;
-     background-color: #fff;
-     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-     border-radius: 8px;
- }
 
  h2 {
      color: #011f3f;
@@ -49,11 +32,36 @@
  }
 
  .btn-secondary {
-     background-color: #6c757d;
-     border-color: #6c757d;
+
+     float: right;
+
  }
 
- .btn-secondary:hover {
-     background-color: #5a6268;
-     border-color: #545b62;
+
+
+ .box {
+     max-width: 90%;
+     margin: 20px auto;
+     padding: 20px;
+     background-color: #fff;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     border-radius: 8px;
+ }
+
+ #stock {
+     margin-top: 1%;
+ }
+
+ #logo {
+     color: #499f68;
+     width: 50%;
+     text-align: center;
+     margin: auto;
+     font-weight: 700;
+     line-height: 30px;
+     margin-top: 20px;
+ }
+
+#toggleTransactions {
+    color: #2b5f3e;
  }

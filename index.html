@@ -8,17 +8,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">    
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="button.css">
 </head>
 
 <body>
-
-    <div class="container">
-        <h2>Lagerförändring in-och ut leverans</h2>
-        <form id="orderForm">
+    <h1 id="logo">Päron AB</h1>
+        <form id="orderForm" class="box">
+            <h3>Lagerförändring in-och ut leverans</h3>
             <div class="form-row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-5">
                     <select class="form-control" id="item" required>
                         <option value="" disabled selected>Välj Produkt</option>
                         <option value="jTelefon">jTelefon</option>
@@ -27,7 +27,7 @@
                     </select>
                 </div>
 
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-5">
                     <select class="form-control" id="storage" required>
                         <option value="" disabled selected>Välj Färdigvarulager</option>
                         <option value="storage1">1. Cupertino</option>
@@ -41,7 +41,7 @@
                     <input type="number" class="form-control" id="quantity" required>
                 </div>
 
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-6">
                     <div class="form-check">
                         <input type="radio" class="form-check-input" id="in" name="action" value="in" required>
                         <label class="form-check-label" for="in">In i lager</label>
@@ -52,36 +52,39 @@
                     </div>
                 </div>
 
-                <div class="form-group col-md-12 text-center">
-                    <button type="button" class="btn btn-secondary btn-lg btn-block"
+                <div class="form-group col-md-6">
+                    <button type="button" class="btn btn-secondary" id="button"
                         onclick="submitOrder()">Submit</button>
                 </div>
             </div>
         </form>
 
 
-        <table class="table table-bordered">
-            <caption></caption>
-            <thead>
-                <tr>
-                    <th>Produkt</th>
-                    <th>Cupertino</th>
-                    <th>Norrköping</th>
-                    <th>Frankfurt</th>
-                </tr>
-            </thead>
-            <tbody id="orderTableBody">
-                <!-- Table rows will be added here -->
-            </tbody>
-        </table>
+        <div id="stock" class="box">
+            <table class="table table-bordered">
+                <caption></caption>
+                <h3>Lagersaldo</h3>
+                <thead>
+                    <tr>
+                        <th>Produkt</th>
+                        <th>Cupertino</th>
+                        <th>Norrköping</th>
+                        <th>Frankfurt</th>
+                    </tr>
+                </thead>
+                <tbody id="orderTableBody">
+                    <!-- Table rows will be added here -->
+                </tbody>
+            </table>
+        </div>
 
-        <div id="transactions">
+        <div id="transactions" class="box">
             <h4>Recent Transactions</h4>
-            <ul id="transactionList">
+            <a href="#" id="toggleTransactions">Click here to view</a>
+            <ul id="transactionList" style="display: none;">
                 <!-- Recent transactions will be added here -->
             </ul>
         </div>
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

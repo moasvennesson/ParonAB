@@ -42,13 +42,13 @@ function submitOrder() {
     document.getElementById('storage').value = '';
     document.getElementById('quantity').value = '';
   
-    // Optional: Provide user feedback (you can customize this part)
-    displayTimedAlert('Order submitted successfully!', 3000); // 3000 milliseconds (3 seconds)
+    //Provide user feedback (you can customize this part)
+    displayTimedAlert('Order submitted successfully!', 3000); 
   }
   
   function displayTimedAlert(message, duration) {
     var alertDiv = document.createElement('div');
-    alertDiv.className = 'alert alert-success'; // You can customize the class for styling
+    alertDiv.className = 'alert alert-success'; 
   
     alertDiv.innerHTML = message;
   
@@ -81,6 +81,19 @@ function updateTable() {
   }
 }
 
+// Add an event listener to the toggleTransactions link
+document.getElementById('toggleTransactions').addEventListener('click', function (event) {
+  event.preventDefault(); // Prevent the default behavior of the link
+  toggleTransactionList();
+});
+
+function toggleTransactionList() {
+  var transactionList = document.getElementById('transactionList');
+
+  // Toggle the display property of the transaction list
+  transactionList.style.display = (transactionList.style.display === 'none' || transactionList.style.display === '') ? 'block' : 'none';
+}
+
 function updateTransactions(item, storage, action, quantity) {
   var transactionList = document.getElementById('transactionList');
   var listItem = document.createElement('li');
@@ -88,8 +101,3 @@ function updateTransactions(item, storage, action, quantity) {
   listItem.innerHTML = `${action.toUpperCase()} - ${quantity} ${item} at ${storage} (${new Date().toLocaleString()})`;
   transactionList.prepend(listItem);
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Set the initial value for the disabled input
-    document.getElementById('quantity').value = 1;
-});
