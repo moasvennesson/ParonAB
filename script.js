@@ -1,5 +1,24 @@
 // Initialize data structure to store cumulative quantities
-var stockData = {};
+var stockData = {
+  'jTelefon': {
+    'storage1': 50,  // Initial value for storage1
+    'storage2': 30,  // Initial value for storage2
+    'storage3': 40   // Initial value for storage3
+  },
+  'jPlatta': {
+    'storage1': 20,
+    'storage2': 10,
+    'storage3': 15
+  },
+  'Päronklocka': {
+    'storage1': 35,
+    'storage2': 25,
+    'storage3': 20
+  }
+};
+
+// Update the table with the initial values
+updateTable();
 
 function submitOrder() {
     var item = document.getElementById('item').value;
@@ -52,14 +71,15 @@ function submitOrder() {
   
     alertDiv.innerHTML = message;
   
-    // Append the alert to the body
-    document.body.appendChild(alertDiv);
+    // Prepend the alert to the body (insertBefore is used to prepend)
+    document.body.insertBefore(alertDiv, document.body.firstChild);
   
     // Set a timeout to remove the alert after the specified duration
     setTimeout(function () {
       alertDiv.remove();
     }, duration);
   }
+  
   
   function updateTable() {
     var tableBody = document.getElementById('orderTableBody');
