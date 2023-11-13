@@ -61,25 +61,37 @@ function submitOrder() {
     }, duration);
   }
   
-function updateTable() {
-  var tableBody = document.getElementById('orderTableBody');
-
-  // Clear existing rows
-  tableBody.innerHTML = '';
-
-  // Add a row for each item
-  for (var item in stockData) {
-    var newRow = tableBody.insertRow();
-    var cellItem = newRow.insertCell(0);
-    cellItem.innerHTML = item;
-
-    // Add a cell for each storage site
-    for (var storage in stockData[item]) {
-      var cellStorage = newRow.insertCell();
-      cellStorage.innerHTML = stockData[item][storage];
+  function updateTable() {
+    var tableBody = document.getElementById('orderTableBody');
+  
+    // Clear existing rows
+    tableBody.innerHTML = '';
+  
+    // Add a row for each item
+    for (var item in stockData) {
+      var newRow = tableBody.insertRow();
+      var cellItem = newRow.insertCell(0);
+      cellItem.innerHTML = item;
+  
+      // Initialize cells for each storage site
+      var storageCells = {
+        'storage1': newRow.insertCell(1),
+        'storage2': newRow.insertCell(2),
+        'storage3': newRow.insertCell(3)
+      };
+  
+      // Set initial values to 0 for each storage site
+      for (var storage in storageCells) {
+        storageCells[storage].innerHTML = '0';
+      }
+  
+      // Update the cell for the specific storage site
+      for (var storage in stockData[item]) {
+        storageCells[storage].innerHTML = stockData[item][storage];
+      }
     }
   }
-}
+  
 
 // Add an event listener to the toggleTransactions link
 document.getElementById('toggleTransactions').addEventListener('click', function (event) {
