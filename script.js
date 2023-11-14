@@ -1,9 +1,9 @@
-// Initialize data structure to store cumulative quantities
+// Give inital values to the stockData
 var stockData = {
   'jTelefon': {
-    'storage1': 50,  // Initial value for storage1
-    'storage2': 30,  // Initial value for storage2
-    'storage3': 40   // Initial value for storage3
+    'storage1': 50,  
+    'storage2': 30,  
+    'storage3': 40   
   },
   'jPlatta': {
     'storage1': 20,
@@ -17,7 +17,7 @@ var stockData = {
   }
 };
 
-// Update the table with the initial values
+// Update the table with the initial values at start
 updateTable();
 
 function submitOrder() {
@@ -25,6 +25,7 @@ function submitOrder() {
     var storage = document.getElementById('storage').value;
     var action = document.querySelector('input[name="action"]:checked');
     var quantity = parseInt(document.getElementById('quantity').value);
+    //get all the form values
   
     // Validate inputs
     if (!item || !storage || !action || isNaN(quantity) || quantity < 0) {
@@ -43,7 +44,7 @@ function submitOrder() {
       stockData[item][storage] = 0;
     }
   
-    // Update the cumulative quantity based on the action
+    // Update the in/out choice from user, adding when in substaticting when out
     if (action === 'in') {
       stockData[item][storage] += quantity;
     } else if (action === 'out') {
@@ -61,26 +62,26 @@ function submitOrder() {
     document.getElementById('storage').value = '';
     document.getElementById('quantity').value = '';
   
-    //Provide user feedback (you can customize this part)
+    //User feedback 
     displayTimedAlert('Varan är tillagd i lager!', 3000); 
   }
   
   function displayTimedAlert(message, duration) {
     var alertDiv = document.createElement('div');
-    alertDiv.className = 'alert alert-success';
+    alertDiv.className = 'alert alert-success'; //green success
   
-    alertDiv.innerHTML = message;
+    alertDiv.innerHTML = message; //from user feedback
   
-    // Set position: fixed to keep the alert at a fixed position
+    // Position and other styles
     alertDiv.style.position = 'fixed';
-    alertDiv.style.top = '20px'; // Adjust the distance from the top as needed
+    alertDiv.style.top = '20px'; 
     alertDiv.style.left = '50%';
     alertDiv.style.transform = 'translateX(-50%)'; // Center horizontally
   
     // Prepend the alert to the body (insertBefore is used to prepend)
     document.body.insertBefore(alertDiv, document.body.firstChild);
   
-    // Set a timeout to remove the alert after the specified duration
+    // Timeout to remove the alert after the specified duration
     setTimeout(function () {
       alertDiv.remove();
     }, duration);
