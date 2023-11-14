@@ -1,67 +1,73 @@
- body {
-     font-family: 'Lato', sans-serif;
-     background-color: #f8f9fa;
-     color: #343a40;
-     margin: 0;
-     padding: 0;
- }
+body {
+    font-family: font-family: 'Rubik', sans-serif;
+    background-color: #dbdfdb;
+    color: #343a40;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: #011f3f;
+}
 
 
+.btn-secondary {
 
- h2 {
-     color: #011f3f;
- }
+    float: right;
+}
 
- .form-group label {
-     color: #011f3f;
- }
+.box {
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
 
- .form-control {
-     border: 1px solid #ced4da;
-     border-radius: 4px;
-     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
- }
+#stock {
+    margin-top: 1%;
+}
 
- .form-control:focus {
-     border-color: #011f3f;
-     box-shadow: 0 0 0 0.2rem rgba(0, 28, 57, 0.25);
- }
-
- .form-check-label {
-     color: #6c757d;
- }
-
- .btn-secondary {
-
-     float: right;
-
- }
-
-
-
- .box {
-     max-width: 90%;
-     margin: 20px auto;
-     padding: 20px;
-     background-color: #fff;
-     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-     border-radius: 8px;
- }
-
- #stock {
-     margin-top: 1%;
- }
-
- #logo {
-     color: #499f68;
-     width: 50%;
-     text-align: center;
-     margin: auto;
-     font-weight: 700;
-     line-height: 30px;
-     margin-top: 20px;
- }
 
 #toggleTransactions {
     color: #2b5f3e;
- }
+}
+
+
+#logo {
+    color: #499f68;
+    width: 90%;
+    text-align: center;
+    margin: auto;
+    font-weight: 700;
+    line-height: 30px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+#logoText {
+    margin-top: auto;
+    font-family: 'Rubik Mono One', monospace;
+    margin-right: 10px;
+    /* Adjust the margin as needed for spacing */
+    font-weight: 600;
+
+}
+
+
+#logoImg {
+    width: 3%;
+}
+
+@media only screen and (max-width: 1200px) {
+    #logoImg {
+        width: 6%;
+    }
+}
+
+h3,
+h4 {
+    font-family: 'Fira Code', monospace;
+    font-weight: bolder;
+}

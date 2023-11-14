@@ -28,7 +28,7 @@ function submitOrder() {
   
     // Validate inputs
     if (!item || !storage || !action || isNaN(quantity) || quantity < 0) {
-      alert('Please fill in all fields and enter a valid quantity.');
+      alert('Vänligen fyll i alla fält korrekt');
       return;
     }
   
@@ -62,7 +62,7 @@ function submitOrder() {
     document.getElementById('quantity').value = '';
   
     //Provide user feedback (you can customize this part)
-    displayTimedAlert('Order submitted successfully!', 3000); 
+    displayTimedAlert('Varan är tillagd i lager!', 3000); 
   }
   
   function displayTimedAlert(message, duration) {
@@ -127,7 +127,7 @@ function toggleTransactionList() {
   transactionList.style.display = (transactionList.style.display === 'none' || transactionList.style.display === '') ? 'block' : 'none';
 
   // Change the text of the toggle link based on the current state
-  toggleLink.innerText = (transactionList.style.display === 'none' || transactionList.style.display === '') ? 'Click here to view' : 'Click here to hide';
+  toggleLink.innerText = (transactionList.style.display === 'none' || transactionList.style.display === '') ? 'Klicka här för att visa' : 'Klicka här för att dölja';
 }
 
 
@@ -135,6 +135,25 @@ function updateTransactions(item, storage, action, quantity) {
   var transactionList = document.getElementById('transactionList');
   var listItem = document.createElement('li');
 
-  listItem.innerHTML = `${action.toUpperCase()} - ${quantity} ${item} at ${storage} (${new Date().toLocaleString()})`;
+  // Create a span element to wrap the content with a background color
+  var actionSpan = document.createElement('span');
+  
+  // Set the background color based on the action
+  actionSpan.style.backgroundColor = (action === 'in') ? 'green' : 'red';
+  actionSpan.style.padding = '1px';
+  actionSpan.style.borderRadius = '4px';
+  actionSpan.style.marginRight = '8px';
+  actionSpan.style.color = 'white';
+
+  // Set the text content of the span
+  actionSpan.innerText = action.toUpperCase();
+
+  // Append the action span to the list item
+  listItem.appendChild(actionSpan);
+
+  // Add the rest of the content to the list item
+  listItem.innerHTML += `${quantity} ${item} at ${storage} (${new Date().toLocaleString()})`;
+
+  // Prepend the styled list item to the transaction list
   transactionList.prepend(listItem);
 }

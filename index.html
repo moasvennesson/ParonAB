@@ -8,17 +8,21 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300&family=Rubik&family=Rubik+Mono+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="button.css">
+    <link rel="stylesheet" href="form.css">
 </head>
 
 <body>
-    <h1 id="logo">Päron AB</h1>
+    <div id="logo" class="d-flex justify-content align-items-center">
+        <h1 id="logoText">Päron AB</h1>
+        <img src="logo.png" alt="ParonABLogo" id="logoImg">
+    </div>
         <form id="orderForm" class="box">
             <h3>Lagerförändring in-och ut leverans</h3>
             <div class="form-row">
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-12">
                     <select class="form-control" id="item" required>
                         <option value="" disabled selected>Välj Produkt</option>
                         <option value="jTelefon">jTelefon</option>
@@ -27,7 +31,7 @@
                     </select>
                 </div>
 
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-12">
                     <select class="form-control" id="storage" required>
                         <option value="" disabled selected>Välj Färdigvarulager</option>
                         <option value="storage1">1. Cupertino</option>
@@ -36,10 +40,10 @@
                     </select>
                 </div>
 
-                <div class="form-group col-md-2">
-
-                    <input type="number" class="form-control" id="quantity" required>
+                <div class="form-group col-md-12">
+                    <input type="number" class="form-control" id="quantity" required placeholder="Ange antal">
                 </div>
+                
 
                 <div class="form-group col-md-6">
                     <div class="form-check">
@@ -79,8 +83,8 @@
         </div>
 
         <div id="transactions" class="box">
-            <h4>Recent Transactions</h4>
-            <a href="#" id="toggleTransactions">Click here to view</a>
+            <h4>Senaste transaktionerna</h4>
+            <a href="#" id="toggleTransactions">Klicka här för att visa</a>
             <ul id="transactionList" style="display: none;">
                 <!-- Recent transactions will be added here -->
             </ul>
