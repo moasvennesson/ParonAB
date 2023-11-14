@@ -1,15 +1,10 @@
 body {
-    font-family: font-family: 'Rubik', sans-serif;
+    font-family: 'Rubik', sans-serif;
     background-color: #dbdfdb;
     color: #343a40;
     margin: 0;
     padding: 0;
 }
-
-h2 {
-    color: #011f3f;
-}
-
 
 .btn-secondary {
 
@@ -70,4 +65,36 @@ h3,
 h4 {
     font-family: 'Fira Code', monospace;
     font-weight: bolder;
+}
+
+
+
+#stock {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+
+
+#stock th, #stock td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: left;
+}
+
+#stock th {
+    background-color: #e0e0e0;
+}
+
+#stock tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alternate row color */
+    transition: background-color 0.3s ease;
+}
+
+#stock tbody tr:hover {
+    background-color: #f0f0f0; /* Hover color */
 }

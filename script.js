@@ -67,9 +67,15 @@ function submitOrder() {
   
   function displayTimedAlert(message, duration) {
     var alertDiv = document.createElement('div');
-    alertDiv.className = 'alert alert-success'; 
+    alertDiv.className = 'alert alert-success';
   
     alertDiv.innerHTML = message;
+  
+    // Set position: fixed to keep the alert at a fixed position
+    alertDiv.style.position = 'fixed';
+    alertDiv.style.top = '20px'; // Adjust the distance from the top as needed
+    alertDiv.style.left = '50%';
+    alertDiv.style.transform = 'translateX(-50%)'; // Center horizontally
   
     // Prepend the alert to the body (insertBefore is used to prepend)
     document.body.insertBefore(alertDiv, document.body.firstChild);
@@ -78,8 +84,8 @@ function submitOrder() {
     setTimeout(function () {
       alertDiv.remove();
     }, duration);
-  }
-  
+}
+
   
   function updateTable() {
     var tableBody = document.getElementById('orderTableBody');

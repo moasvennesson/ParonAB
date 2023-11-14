@@ -1,3 +1,5 @@
+/* Style for the text and number fields in form */
+
 .form-group label {
     color: #013f12;
 }
@@ -23,11 +25,42 @@
 }
 
 .form-control:valid {
-   box-shadow: 0 0 10px rgba(90, 167, 118, 0.6); /* Add shadow on focus */
+   box-shadow: 0 0 3px rgba(90, 167, 118, 0.6); /* Add shadow on focus */
    background-color: #fbfffa; /* New background color after selection */
    outline: 0;
    color: #000; /* Change text color on focus */
 }
 
+/* Here style for radiobuttons begin */
 
+.custom-radio input {
+    display: none;
+}
 
+.custom-radio label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    padding-left: 30px;
+
+}
+
+.custom-radio label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ebebeb;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(22, 49, 32, 0.2); 
+}
+
+.custom-radio input:checked + label:before {
+    background-color: #499f68;
+    border-color: #499f68;
+}
