@@ -10,8 +10,8 @@
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     background-color: #ebebeb;
     transition: box-shadow 0.3s ease-in-out; /* Add transition for smoother effect */
-   background-color: #ebebeb;
-   box-shadow: 0 4px 6px rgba(22, 49, 32, 0.2); 
+    background-color: #ebebeb;
+    box-shadow: 0 4px 6px rgba(22, 49, 32, 0.2); 
 }
 
 .form-control:focus {

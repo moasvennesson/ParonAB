@@ -107,12 +107,12 @@ function submitOrder() {
         'storage3': newRow.insertCell(3)
       };
   
-      // Set initial values to 0 for each storage site
+      // Set initial values to 0 for each storage site to avoid valus like undefined 
       for (var storage in storageCells) {
         storageCells[storage].innerHTML = '0';
       }
   
-      // Update the cell for the specific storage site
+      // Update the cell for the specific storage site based on stockData
       for (var storage in stockData[item]) {
         storageCells[storage].innerHTML = stockData[item][storage];
       }
@@ -122,7 +122,7 @@ function submitOrder() {
 
 // Add an event listener to the toggleTransactions link
 document.getElementById('toggleTransactions').addEventListener('click', function (event) {
-  event.preventDefault(); // Prevent the default behavior of the link
+  event.preventDefault(); // Prevent the default behavior of the link (not navigate to the URL specified in the href attribute)
   toggleTransactionList();
 });
 
